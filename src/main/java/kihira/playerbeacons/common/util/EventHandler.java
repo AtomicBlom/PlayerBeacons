@@ -35,6 +35,7 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.DrawBlockHighlightEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.EntityInteractEvent;
@@ -204,4 +205,11 @@ public class EventHandler {
 			}
 		}
 	}
+
+    @SubscribeEvent
+    public void onEntityRender(RenderLivingEvent.Pre event) {
+        if (ClientProxy.playerPhased) {
+            event.setCanceled(true);
+        }
+    }
 }
