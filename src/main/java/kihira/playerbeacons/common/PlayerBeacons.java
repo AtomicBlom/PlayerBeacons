@@ -12,6 +12,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import kihira.playerbeacons.common.buff.*;
 import kihira.playerbeacons.common.command.CommandPlayerBeacons;
 import kihira.playerbeacons.common.command.CommandPlayerHead;
+import kihira.playerbeacons.common.command.CommandPlayerPhase;
 import kihira.playerbeacons.common.corruption.BatCorruption;
 import kihira.playerbeacons.common.corruption.EndTeleportCorruption;
 import kihira.playerbeacons.common.corruption.EndermanAggroCorruption;
@@ -82,6 +83,7 @@ public class PlayerBeacons {
             FMLCommonHandler.instance().bus().register(new FMLEventHandler());
             NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
             proxy.registerRenderers();
+            proxy.registerMessages();
 
             new EnchantmentDecapitation(config.decapitationEnchantmentID);
         }
@@ -96,6 +98,7 @@ public class PlayerBeacons {
 	public void serverStart(FMLServerStartingEvent e) {
 		e.registerServerCommand(new CommandPlayerHead());
         e.registerServerCommand(new CommandPlayerBeacons());
+        e.registerServerCommand(new CommandPlayerPhase());
 	}
 
     @Mod.EventHandler

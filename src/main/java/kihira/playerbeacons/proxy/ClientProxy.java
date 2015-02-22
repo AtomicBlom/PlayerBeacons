@@ -12,6 +12,8 @@ import kihira.playerbeacons.client.render.ItemPlayerBeaconRenderer;
 import kihira.playerbeacons.common.PlayerBeacons;
 import kihira.playerbeacons.common.lib.ModBlocks;
 import kihira.playerbeacons.common.network.CorruptionUpdateMessage;
+import kihira.playerbeacons.common.network.PlayerPhasedMessage;
+import kihira.playerbeacons.common.network.PlayerPhasedMessageHandler;
 import kihira.playerbeacons.common.tileentity.TileEntityDefiledSoulPylon;
 import kihira.playerbeacons.common.tileentity.TileEntityPlayerBeacon;
 import net.minecraft.client.Minecraft;
@@ -37,6 +39,7 @@ public class ClientProxy extends CommonProxy {
 	//public static final ResourceLocation santaHatTexture = new ResourceLocation("playerbeacon", "textures/model/santahat.png");
 
     public static float playerCorruption = 0F;
+    public static boolean playerPhased = false;
 
     //TODO store original skin on disk instead of modified skin in HashMap?
     private final HashMap<String, BufferedImage> playerSkins = new HashMap<String, BufferedImage>();
@@ -44,6 +47,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void registerMessages() {
         PlayerBeacons.networkWrapper.registerMessage(CorruptionUpdateMessage.CorruptionUpdateMessageHandler.class, CorruptionUpdateMessage.class, 0, Side.CLIENT);
+        PlayerBeacons.networkWrapper.registerMessage(PlayerPhasedMessageHandler.class, PlayerPhasedMessage.class, 1, Side.CLIENT);
         super.registerMessages();
     }
 

@@ -144,4 +144,22 @@ public class BeaconDataHelper {
 
         return beaconData;
     }
+
+    public static void setPlayerPhased(EntityPlayer player, boolean playerPhased)
+    {
+        NBTTagCompound data = getBeaconDataTag(player);
+
+        data.setBoolean("Phased", playerPhased);
+    }
+
+    public static boolean getPlayerPhased(EntityPlayer player) {
+        NBTTagCompound data = getBeaconDataTag(player);
+        boolean isPhased = false;
+
+        if (data.hasKey("Corruption")) {
+            isPhased = data.getBoolean("Phased");
+        }
+
+        return isPhased;
+    }
 }
