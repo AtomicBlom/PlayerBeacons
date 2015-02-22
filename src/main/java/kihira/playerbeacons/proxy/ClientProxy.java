@@ -12,6 +12,7 @@ import kihira.playerbeacons.client.render.ItemPlayerBeaconRenderer;
 import kihira.playerbeacons.common.PlayerBeacons;
 import kihira.playerbeacons.common.lib.ModBlocks;
 import kihira.playerbeacons.common.network.CorruptionUpdateMessage;
+import kihira.playerbeacons.common.network.CorruptionUpdateMessageHandler;
 import kihira.playerbeacons.common.network.PlayerPhasedMessage;
 import kihira.playerbeacons.common.network.PlayerPhasedMessageHandler;
 import kihira.playerbeacons.common.tileentity.TileEntityDefiledSoulPylon;
@@ -46,7 +47,7 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void registerMessages() {
-        PlayerBeacons.networkWrapper.registerMessage(CorruptionUpdateMessage.CorruptionUpdateMessageHandler.class, CorruptionUpdateMessage.class, 0, Side.CLIENT);
+        PlayerBeacons.networkWrapper.registerMessage(CorruptionUpdateMessageHandler.class, CorruptionUpdateMessage.class, 0, Side.CLIENT);
         PlayerBeacons.networkWrapper.registerMessage(PlayerPhasedMessageHandler.class, PlayerPhasedMessage.class, 1, Side.CLIENT);
         super.registerMessages();
     }

@@ -12,9 +12,9 @@ import net.minecraft.client.entity.AbstractClientPlayer;
 
 public class CorruptionUpdateMessage implements IMessage {
 
-    private String playerName;
-    private float newCorr;
-    private float oldCorr;
+    String playerName;
+    float newCorr;
+    float oldCorr;
 
     public CorruptionUpdateMessage() {}
     public CorruptionUpdateMessage(String playerName, float newCorr, float oldCorr) {
@@ -38,21 +38,4 @@ public class CorruptionUpdateMessage implements IMessage {
         buf.writeFloat(this.oldCorr);
     }
 
-    public class CorruptionUpdateMessageHandler implements IMessageHandler<CorruptionUpdateMessage, IMessage> {
-
-        @Override
-        public IMessage onMessage(CorruptionUpdateMessage message, MessageContext ctx) {
-            AbstractClientPlayer player = (AbstractClientPlayer) Minecraft.getMinecraft().theWorld.getPlayerEntityByName(message.playerName);
-
-            if (player != null) {
-                if (message.newCorr == 0) PlayerBeacons.proxy.restorePlayerSkin(player);
-                else PlayerBeacons.proxy.corruptPlayerSkin(player, (int) message.newCorr, (int) message.oldCorr);
-
-                if (Minecraft.getMinecraft().thePlayer.getCommandSenderName().equals(message.playerName)) {
-                    ClientProxy.playerCorruption = message.newCorr;
-                }
-            }
-            return null;
-        }
-    }
 }
