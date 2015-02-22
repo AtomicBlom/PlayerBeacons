@@ -21,6 +21,14 @@ repositories {
         name = 'Kihira Repo'
         url = 'http://maven.kihirakreations.co.uk'
     }
+    maven { // The repo from which to get waila
+        name "Mobius Repo"
+        url "http://mobiusstrip.eu/maven"
+    }
+    maven { // the repo from which to get NEI and stuff
+        name 'CB Repo'
+        url "http://chickenbones.net/maven/"
+    }
 }
 
 apply plugin: 'forge'
@@ -41,6 +49,7 @@ configurations {
 dependencies {
     deployerJars "org.apache.maven.wagon:wagon-ftp:2.2"
     compile "kihira:FoxLib:"+project.foxlibVersion+":dev"
+    compile "mcp.mobius.waila:Waila:1.5.5_1.7.10:dev"
 }
 
 version = "${project.ext.mcVersion}-${project.ext.massive}.${project.ext.major}.${project.minor}.${System.getenv("BUILD_NUMBER") ?: 0}"
